@@ -5,6 +5,8 @@ import com.ticketingapplication.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl extends  AbstractMapService<String , UserDTO> implements UserService {
     @Override
@@ -38,4 +40,13 @@ public class UserServiceImpl extends  AbstractMapService<String , UserDTO> imple
     }
 
 
+    @Override
+    public List<UserDTO> findAllManagers() {
+        return super.findAll().stream().filter(p->p.getRole().getDescription().equals("Manager")).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserDTO> readAllEmployees() {
+        return super.findAll().stream().filter(p->p.getRole().getDescription().equals("Employee")).collect(Collectors.toList());
+    }
 }

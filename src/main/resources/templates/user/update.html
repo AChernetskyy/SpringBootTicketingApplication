@@ -153,15 +153,15 @@
 
                                             <tbody>
 
-                                            <tr>
-                                                <td th:text="${existingUser.firstName+' '+existingUser.lastName}"></td>
-                                                <td th:text="${existingUser.userName}"></td>
-                                                <td th:text="${existingUser.gender.value}"></td>
-                                                <td th:text="${existingUser.phone}"></td>
-                                                <td th:text="${existingUser.role.description}"></td>
+                                            <tr th:each="readEachUser:${users}">
+                                                <td th:text="${readEachUser.firstName+' '+readEachUser.lastName}"></td>
+                                                <td th:text="${readEachUser.userName}"></td>
+                                                <td th:text="${readEachUser.gender.value}"></td>
+                                                <td th:text="${readEachUser.phone}"></td>
+                                                <td th:text="${readEachUser.role.description}"></td>
                                                 <td class="actions">
-                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm">Update</button></a>
-                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
+                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm" disabled>Update</button></a>
+                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm" disabled>Delete</button></a>
                                                 </td>
                                             </tr>
 

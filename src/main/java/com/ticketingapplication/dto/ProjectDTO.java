@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,13 +17,14 @@ public class ProjectDTO {
     private String projectCode;
     private UserDTO assignedManager;
 
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     private String projectDetails;
+    @Enumerated(value = EnumType.STRING)
     private Status projectStatus;
 
 
