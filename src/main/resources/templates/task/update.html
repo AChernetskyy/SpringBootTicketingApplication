@@ -141,8 +141,8 @@
                                                 <td th:text="${#temporals.format(eachTask.timeCreated, 'MM-dd-yyyy')}"></td>
                                                 <td th:text="${eachTask.getTaskStatus.value}"></td>
                                                 <td class="actions">
-                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm" disabled>Update</button></a>
-                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm" disabled>Delete</button></a>
+                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm disabled-button">Update</button></a>
+                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm disabled-button">Delete</button></a>
                                                 </td>
 
                                             </tr>

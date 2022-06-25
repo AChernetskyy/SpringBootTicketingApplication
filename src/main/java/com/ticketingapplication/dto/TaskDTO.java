@@ -1,9 +1,10 @@
 package com.ticketingapplication.dto;
 
 import com.ticketingapplication.enums.Status;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EnumType;
@@ -12,7 +13,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class TaskDTO {
    private Long id;
    private ProjectDTO project;

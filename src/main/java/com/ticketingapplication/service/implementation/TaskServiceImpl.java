@@ -1,6 +1,5 @@
 package com.ticketingapplication.service.implementation;
 
-import com.ticketingapplication.dto.ProjectDTO;
 import com.ticketingapplication.dto.TaskDTO;
 import com.ticketingapplication.dto.UserDTO;
 import com.ticketingapplication.enums.Status;
@@ -57,5 +56,16 @@ public class TaskServiceImpl extends AbstractMapService<Long, TaskDTO> implement
     @Override
     public List<TaskDTO> findTasksByManager(UserDTO manager) {
         return findAll().stream().filter(p->p.getProject().getAssignedManager().equals(manager)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskDTO> findTasksByEmployee(UserDTO employee) {
+
+        return findAll().stream().filter(p->p.getEmployee().equals(employee)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskDTO> findPendingTasksByEmployee(Status status) {
+        return null;
     }
 }

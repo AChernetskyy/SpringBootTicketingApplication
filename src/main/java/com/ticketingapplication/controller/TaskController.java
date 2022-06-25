@@ -64,4 +64,16 @@ public class TaskController {
         taskService.deleteById(id);
         return "redirect:/task/create";
     }
+
+    @GetMapping("/pending-tasks")
+    public String getEmployeePendingTasks(Model model){
+        //taskService.findTasksByEmployee()
+
+        return "/task/pending-tasks";
+    }
+
+    @GetMapping("/archive")
+    public String getArchiveTasks(){
+        return "task/archive";
+    }
 }
