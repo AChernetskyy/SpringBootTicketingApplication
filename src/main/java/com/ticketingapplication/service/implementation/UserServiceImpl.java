@@ -15,11 +15,6 @@ public class UserServiceImpl extends  AbstractMapService<String , UserDTO> imple
     }
 
     @Override
-    public void delete(UserDTO object) {
-       super.map.remove(object);
-    }
-
-    @Override
     public List<UserDTO> findAll() {
         return super.findAll();
     }

@@ -6,9 +6,7 @@ import com.ticketingapplication.service.TaskService;
 import com.ticketingapplication.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/task")
@@ -33,8 +31,37 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public String saveTask(TaskDTO taskDTO){
+    public String saveTask(TaskDTO taskDTO) {
         taskService.save(taskDTO);
+        return "redirect:/task/create";
+    }
+
+    @GetMapping("/update/{id}") //end point with ID
+    public String update(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("readCurrentTask", taskService.findById(id));
+        model.addAttribute("readAllTasks", taskService.findAll());
+        model.addAttribute("readAllProject", projectService.findAll());
+        model.addAttribute("readAllEmployees", userService.readAllEmployees());
+
+        return "/task/update"; //navigate to HTML
+    }
+
+    //    @PostMapping("/update/{taskId}")
+//    public String postUpdate(@PathVariable("taskId") Long id, @ModelAttribute("readCurrentTask") TaskDTO taskDTO){
+//        taskDTO.setId(id);// Setting ID to avoid NullPointerException
+//        taskService.update(taskDTO);
+//        return "redirect:/task/create";
+//    }
+    //Short Cut for the same method
+    @PostMapping("/update/{id}")//{id} must match variable in the Class TaskDTO and Spring will match and set it
+    public String postUpdate(TaskDTO taskDTO) {
+        taskService.update(taskDTO);
+        return "redirect:/task/create";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable("id") Long id) {
+        taskService.deleteById(id);
         return "redirect:/task/create";
     }
 }

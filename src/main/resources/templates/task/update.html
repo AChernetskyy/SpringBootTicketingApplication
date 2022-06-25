@@ -32,14 +32,22 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form>
+                                    <form th:object="${readCurrentTask}" th:action="@{/task/update/{id}(id=${readCurrentTask.getId()})}" th:method="post">
 
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Project</label>
-                                                    <select name="project" class="custom-select">
-                                                        <option></option>
+                                                    <select th:field="*{project.projectCode}" name="project" class="custom-select">
+                                                        <option
+                                                                th:value="''"
+                                                                th:text="Select"
+                                                        ></option>
+                                                        <option
+                                                                th:each="readEachProject:${readAllProject}"
+                                                                th:value="${readEachProject.projectCode}"
+                                                                th:text="${readEachProject.projectCode}"
+                                                        ></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -49,8 +57,16 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Assigned Employee</label>
-                                                    <select name="assignedemployee" class="custom-select">
-                                                        <option></option>
+                                                    <select th:field="*{employee}" name="assignedemployee" class="custom-select">
+                                                        <option
+                                                                th:value="''"
+                                                                th:text="Select"
+                                                        ></option>
+                                                        <option
+                                                                th:each="eachEmployee:${readAllEmployees}"
+                                                                th:value="${eachEmployee.userName}"
+                                                                th:text="${eachEmployee.firstName+' '+eachEmployee.lastName}"
+                                                        ></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -60,7 +76,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="tasksubject" class="col-form-label">Task Subject</label>
-                                                    <input id="tasksubject" type="text" class="form-control" placeholder="task subject">
+                                                    <input th:field="*{taskSubject}" id="tasksubject" type="text" class="form-control" placeholder="task subject">
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +85,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="taskdetail">Task Detail</label>
-                                                    <textarea id="taskdetail" class="form-control" placeholder="task detail"></textarea>
+                                                    <textarea th:field="*{taskDetails}" id="taskdetail" class="form-control" placeholder="task detail"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -118,15 +134,15 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                            <tr th:each="eachTask:${readAllTasks}">
+                                                <td th:text="${eachTask.project.projectCode}"></td>
+                                                <td th:text="${eachTask.taskSubject}"></td>
+                                                <td th:text="${eachTask.employee.firstName+' '+eachTask.employee.lastName}"></td>
+                                                <td th:text="${#temporals.format(eachTask.timeCreated, 'MM-dd-yyyy')}"></td>
+                                                <td th:text="${eachTask.getTaskStatus.value}"></td>
                                                 <td class="actions">
-                                                    <a href="#" class="btn btn-warning rounded-0">Update</a>
-                                                    <a href="#" class="btn btn-danger rounded-0">Delete</a>
+                                                    <a href="#"><button type="button" class="btn btn-warning btn-sm" disabled>Update</button></a>
+                                                    <a href="#" class="delete-row"><button type="button" class="btn btn-secondary btn-sm" disabled>Delete</button></a>
                                                 </td>
 
                                             </tr>

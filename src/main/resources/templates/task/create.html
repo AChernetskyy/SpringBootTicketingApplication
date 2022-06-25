@@ -144,11 +144,11 @@
                                                 <td th:text="${readTask.project.projectCode}"></td>
                                                 <td th:text="${readTask.taskSubject}"></td>
                                                 <td th:text="${readTask.employee.firstName+' '+readTask.employee.lastName}"></td>
-                                                <td th:text="${readTask.timeCreated}"></td>
-                                                <td th:text="${readTask.projectStatus}"></td>
+                                                <td th:text="${#temporals.format(readTask.timeCreated, 'MM-dd-yyyy')}"></td>
+                                                <td th:text="${readTask.getTaskStatus.value}"></td>
                                                 <td class="actions">
-                                                    <a href="#" class="btn btn-warning rounded-0">Update</a>
-                                                    <a href="#" class="btn btn-danger rounded-0">Delete</a>
+                                                    <a th:href="@{/task/update/{id}(id=${readTask.getId()})}" class="btn btn-warning rounded-0">Update</a>
+                                                    <a th:href="@{/task/delete/{id}(id=${readTask.getId()})}" class="btn btn-danger rounded-0">Delete</a>
                                                 </td>
                                             </tr>
                                             </tbody>
